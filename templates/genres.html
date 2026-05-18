@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Жанры музыки{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Все жанры музыки</h1>
+
+    <div class="genres-grid">
+        {% for genre in genres %}
+        <div class="genre-card">
+            <div class="genre-header">
+                <h3 class="genre-name">{{ genre.name }}</h3>
+            </div>
+            <div class="genre-description">
+                <p>{{ genre.description }}</p>
+            </div>
+            <div class="genre-actions">
+                <a href="{{ url_for('listen_examples', genre=genre.name) }}"
+                   class="btn listen-btn"
+                   aria-label="Прослушать примеры {{ genre.name }}">
+                    Прослушать примеры
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.genres-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.genre-card {
+    background: linear-gradient(135deg, #181818 0%, #2a2a2a 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid #2d2d2d;
+    position: relative;
+    overflow: hidden;
+}
+
+.genre-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.genre-name {
+    color: #1db954;
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.genre-description {
+    color: #e9ecef;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.genre-actions {
+    text-align: center;
+}
+
+.listen-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.listen-btn:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 12px 24px rgba(29, 185, 84, 0.3),
+        0 0 0 3px rgba(29, 185, 84, 0.1);
+}
+
+.genre-card:hover {
+    transform: translateY(-15px) scale(1.03);
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.4),
+        0 0 0 4px rgba(29, 185, 84, 0.15);
+}
+</style>
+{% endblock %}

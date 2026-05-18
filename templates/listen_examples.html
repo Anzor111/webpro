@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Примеры: {{ genre }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Примеры музыки: {{ genre }}</h1>
+
+    <div class="songs-list">
+        {% if songs %}
+            {% for song in songs %}
+                <div class="song-item">
+                    <h3 class="song-title">{{ song.title }} — {{ song.artist }}</h3>
+            <audio controls class="audio-player">
+                {% if song.file %}
+                    <source src="{{ url_for('uploaded_file', filename=song.file) }}" type="audio/mp3">
+                {% else %}
+                    <p>Аудиофайл временно недоступен</p>
+                {% endif %}
+            </audio>
+        </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-songs">
+                <p>К сожалению, примеры для жанра «{{ genre }}» пока недоступны.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="more-music">
+        <p>Хотите услышать больше? Посетите <a href="https://vk.com/search?c[q]={{ genre }}" target="_blank" class="vk-link">VK Музыку</a> — там вы найдёте тысячи треков в этом жанре!</p>
+    </div>
+
+    <div class="back-link">
+        <a href="{{ url_for('genres') }}" class="btn back-btn">&larr; Вернуться к жанрам</a>
+    </div>
+</div>
+
+<style>
+.songs-list {
+    margin: 3rem 0;
+}
+
+.song-item {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    border: 1px solid #2d2d2d;
+    transition: all 0.3s ease;
+}
+
+.song-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border-color: #1db954;
+}
+
+.song-title {
+    color: #fff;
+    margin: 0 0 1rem 0;
+    font-size: 1.3rem;
+}
+
+.audio-player {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.no-songs {
+    text-align: center;
+    padding: 2rem;
+    background: #2a2a2a;
+    border-radius: 12px;
+}
+
+.more-music {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(29, 185, 84, 0.1);
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.vk-link {
+    color: #1db954;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.vk-link:hover {
+    color: #1ed760;
+    text-decoration: underline;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #6c757d;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #545b62;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+}
+</style>
+{% endblock %}

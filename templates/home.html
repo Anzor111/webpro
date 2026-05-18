@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+
+{% block title %}Главная{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">История музыки</h1>
+
+    {% if session.username %}
+    <p class="welcome-message">
+        Добро пожаловать, <span class="username">{{ session.username }}</span>!
+    </p>
+    {% endif %}
+
+    <article class="history-article">
+        <section class="era">
+            <h2>Древние истоки (до 500 г. н. э.)</h2>
+            <p>Музыка сопровождает человечество с древнейших времён. Первые музыкальные инструменты, обнаруженные археологами, датируются 40 000 лет назад. В Древнем Египте музыка использовалась в религиозных церемониях, а в Древней Греции стала частью философских учений.</p>
+        </section>
+
+        <section class="era">
+            <h2>Средневековье и Ренессанс (500–1600 гг.)</h2>
+            <p>Эпоха Возрождения принесла расцвет полифонии. Композиторы вроде Палестрины создавали сложные хоровые произведения.</p>
+        </section>
+
+        <section class="era">
+            <h2>Барокко и Классицизм (1600–1820 гг.)</h2>
+            <p>Барокко — сложные инструментальные формы (Бах, Вивальди). Классическая эпоха подарила нам симфонии и сонаты (Моцарт, Гайдн).</p>
+        </section>
+
+        <section class="era">
+            <h2>Романтизм и XX век (1820–2000 гг.)</h2>
+            <p>Романтизм — эмоциональная глубина (Шопен, Лист). XX век — революционные изменения: джаз, рок, электронная музыка.</p>
+        </section>
+    </article>
+
+    <div class="quick-links">
+        <a href="{{ url_for('genres') }}" class="btn main-btn">Изучить жанры музыки</a>
+    </div>
+</div>
+
+<style>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.page-title {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #1db954, #1ed760);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.welcome-message {
+    text-align: center;
+    color: #1db954;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.username {
+    font-weight: 700;
+    color: #fff;
+}
+
+.history-article {
+    line-height: 1.6;
+    color: #e9ecef;
+}
+
+.era {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.era h2 {
+    color: #1db954;
+    margin-bottom: 1rem;
+}
+
+.quick-links {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.main-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.main-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(29, 185, 84, 0.3);
+}
+</style>
+{% endblock %}

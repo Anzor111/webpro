@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}Добавить свою песню{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Добавить свою песню в музей</h1>
+
+    {% if error %}
+        <div class="error-message">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+        <div class="form-group">
+            <label for="title" class="form-label">Название песни:</label>
+            <input type="text" id="title" name="title" required class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="artist" class="form-label">Исполнитель:</label>
+            <input type="text" id="artist" name="artist" required class="form-input">
+        </div>
+
+        <div class="form-group">
+            <label for="song_file" class="form-label">Выберите аудиофайл (MP3):</label>
+            <input type="file" id="song_file" name="song_file" accept="audio/mp3" required class="form-file">
+        </div>
+
+        <button type="submit" class="submit-btn">Загрузить песню</button>
+    </form>
+
+    {% if songs %}
+        <div class="uploaded-songs">
+            <h2 class="section-title">Загруженные песни:</h2>
+            <ul class="songs-list">
+                {% for song in songs %}
+                <li class="song-item-uploaded">
+                    <span class="song-info">{{ song.title }} — {{ song.artist }}</span>
+            <audio controls class="audio-player">
+                <source src="{{ url_for('uploaded_file', filename=song.filename) }}" type="audio/mp3">
+                Ваш браузер не поддерживает аудио.
+            </audio>
+        </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+</div>
+
+<style>
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.page-title {
+    text-align: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #1db954, #1ed760);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.upload-form {
+    background: linear-gradient(135deg, #181818 0%, #2a2a2a 100%);
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 3rem;
+    border: 1px solid #2d2d2d;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    color: #e9ecef;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-input,
+.form-file {
+    width: 100%;
+    padding: 0.8rem;
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.form-file {
+    padding: 0.6rem;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(29, 185, 84, 0.3);
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.uploaded-songs {
+    margin-top: 3rem;
+}
+
+.section-title {
+    color: #1db954;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.songs-list {
+    list-style: none;
+    padding: 0;
+}
+
+.song-item-uploaded {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2a2a2a;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.song-info {
+    color: #fff;
+    font-weight: 500;
+}
+
+.audio-player {
+    width: 200px;
+}
+
+/* Адаптивность для формы загрузки */
+@media (max-width: 768px) {
+    .upload-form {
+        padding: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.2rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .song-item-uploaded {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .audio-player {
+        width: 100%;
+    }
+}
+</style>
+{% endblock %}

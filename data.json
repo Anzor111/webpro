@@ -1,0 +1,51 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "user1",
+      "email": "user1@example.com",
+      "password": "hashed_password_here"
+    },
+    {
+
+    }
+  ],
+  "genres": {
+    "Рок": [
+      {
+        "title": "Песня 1",
+        "artist": "Исполнитель 1",
+        "filename": "song1.mp3"
+      }
+    ],
+    "Джаз": [
+      {
+        "title": "Песня 2",
+        "artist": "Исполнитель 2",
+        "filename": "song2.mp3"
+      }
+    ]
+  },
+  "uploaded_songs": [
+    {
+      "title": "Моя песня",
+      "artist": "Я",
+      "filename": "my_song.mp3"
+    },
+    {
+      "title": "нежная походка",
+      "artist": "Алиха муцураев",
+      "filename": "Akhmadov_Alikhan_-_Nezhnaya_pokhodka_8032.mp3"
+    },
+    {
+      "title": "azazel",
+      "artist": "khalif",
+      "filename": "Khalif_-_Azazel_75908312.mp3"
+    },
+    {
+      "title": "нежная походка",
+      "artist": "Алиха муцураев",
+      "filename": "Akhmadov_Alikhan_-_Nezhnaya_pokhodka_8032_1.mp3"
+    }
+  ]
+}
